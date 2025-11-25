@@ -24,37 +24,47 @@ export default function Testimonials() {
   }, { scope: containerRef });
 
   return (
-    <section id="testimonials" ref={containerRef} className="py-32 overflow-hidden bg-black text-white border-t-2 border-white">
-      <h2 className="text-5xl md:text-7xl font-bold mb-24 px-6 text-center uppercase tracking-tighter font-heading text-white">
-        Student Stories
-      </h2>
+    <section id="testimonials" ref={containerRef} className="py-0 overflow-hidden bg-pastel-blue border-b-2 border-black">
+       <div className="border-b-2 border-black py-16 px-6 bg-white">
+        <h2 className="text-5xl md:text-8xl font-bold text-center uppercase tracking-tighter font-heading text-black">
+          Student Stories
+        </h2>
+      </div>
       
-      <div ref={scrollerRef} className="flex w-max border-y-2 border-white bg-white">
-        {testimonials.map((t) => (
-          <div
-            key={t.id}
-            className="w-[400px] md:w-[500px] p-12 border-r-2 border-black bg-white text-black flex flex-col justify-between shrink-0 hover:bg-black hover:text-white transition-colors duration-300 group"
-          >
-            <p className="text-2xl font-bold mb-12 uppercase leading-tight">"{t.quote}"</p>
-            <div>
-              <div className="font-bold text-xl uppercase tracking-wide group-hover:text-white">{t.name}</div>
-              <div className="text-sm font-mono text-gray-600 group-hover:text-gray-400 uppercase mt-2">{t.role}</div>
+      <div className="py-20">
+        <div ref={scrollerRef} className="flex w-max">
+          {testimonials.map((t) => (
+            <div
+              key={t.id}
+              className="w-[400px] md:w-[600px] mx-6 p-10 border-2 border-black bg-white text-black flex flex-col justify-between shrink-0 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-shadow duration-300"
+            >
+              <p className="text-2xl md:text-3xl font-bold mb-12 uppercase leading-tight font-heading">"{t.quote}"</p>
+              <div className="flex items-center gap-4 border-t-2 border-black pt-6">
+                 <div className="w-12 h-12 bg-black rounded-full"></div>
+                 <div>
+                  <div className="font-bold text-xl uppercase tracking-wide">{t.name}</div>
+                  <div className="text-sm font-mono text-gray-600 uppercase">{t.role}</div>
+                 </div>
+              </div>
             </div>
-          </div>
-        ))}
-        {/* Duplicate for seamless feel */}
-        {testimonials.map((t) => (
-          <div
-            key={`${t.id}-duplicate`}
-            className="w-[400px] md:w-[500px] p-12 border-r-2 border-black bg-white text-black flex flex-col justify-between shrink-0 hover:bg-black hover:text-white transition-colors duration-300 group"
-          >
-            <p className="text-2xl font-bold mb-12 uppercase leading-tight">"{t.quote}"</p>
-            <div>
-              <div className="font-bold text-xl uppercase tracking-wide group-hover:text-white">{t.name}</div>
-              <div className="text-sm font-mono text-gray-600 group-hover:text-gray-400 uppercase mt-2">{t.role}</div>
+          ))}
+          {/* Duplicate for seamless feel */}
+          {testimonials.map((t) => (
+            <div
+              key={`${t.id}-duplicate`}
+              className="w-[400px] md:w-[600px] mx-6 p-10 border-2 border-black bg-white text-black flex flex-col justify-between shrink-0 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-shadow duration-300"
+            >
+              <p className="text-2xl md:text-3xl font-bold mb-12 uppercase leading-tight font-heading">"{t.quote}"</p>
+              <div className="flex items-center gap-4 border-t-2 border-black pt-6">
+                 <div className="w-12 h-12 bg-black rounded-full"></div>
+                 <div>
+                  <div className="font-bold text-xl uppercase tracking-wide">{t.name}</div>
+                  <div className="text-sm font-mono text-gray-600 uppercase">{t.role}</div>
+                 </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

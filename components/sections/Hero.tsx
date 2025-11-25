@@ -7,74 +7,69 @@ import { useGSAP } from "@gsap/react";
 export default function Hero() {
   const containerRef = useRef(null);
   const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const ctaRef = useRef(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-    tl.from(titleRef.current, {
+    gsap.from(titleRef.current, {
       y: 100,
       opacity: 0,
       duration: 1.5,
-      stagger: 0.1,
-    })
-      .from(
-        subtitleRef.current,
-        {
-          y: 20,
-          opacity: 0,
-          duration: 1,
-        },
-        "-=1"
-      )
-      .from(
-        ctaRef.current,
-        {
-          scale: 0.9,
-          opacity: 0,
-          duration: 0.5,
-        },
-        "-=0.5"
-      );
+      ease: "power4.out",
+    });
   }, { scope: containerRef });
 
   return (
     <section
       id="hero"
       ref={containerRef}
-      className="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 bg-white text-black relative overflow-hidden"
+      className="min-h-screen pt-20 flex flex-col border-b-2 border-black"
     >
-      {/* Decorative Grid Lines */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute left-4 md:left-10 top-0 bottom-0 w-[1px] bg-gray-200"></div>
-        <div className="absolute right-4 md:right-10 top-0 bottom-0 w-[1px] bg-gray-200"></div>
-      </div>
-
-      <div className="overflow-hidden z-10">
+      {/* Top Section: Massive Title */}
+      <div className="flex-1 bg-pastel-pink flex items-center justify-center border-b-2 border-black overflow-hidden p-4">
         <h1
           ref={titleRef}
-          className="text-[15vw] leading-[0.8] font-bold tracking-tighter font-heading uppercase mb-4 text-black mix-blend-multiply"
+          className="text-[12vw] md:text-[14vw] leading-[0.8] font-bold tracking-tighter font-heading uppercase text-center text-black mix-blend-multiply"
         >
-          Code
-          <br />
-          <span className="text-transparent bg-clip-text bg-black stroke-black stroke-2 text-stroke-2">With Vibe</span>
+          Code With Vibe
         </h1>
       </div>
-      
-      <p
-        ref={subtitleRef}
-        className="text-xl md:text-2xl font-medium max-w-3xl mb-12 uppercase tracking-wide border-l-4 border-black pl-6 text-left"
-      >
-        在代码中寻找韵律，用技术构建美学。
-        <br />
-        <span className="text-gray-600">Discover the rhythm in code and build aesthetics with technology.</span>
-      </p>
-      
-      <div ref={ctaRef}>
-        <button className="bg-black text-white px-12 py-5 text-xl font-bold uppercase tracking-wider hover:bg-transparent hover:text-black border-2 border-black transition-all duration-300">
-          Start Exploring
-        </button>
+
+      {/* Bottom Section: Grid Info */}
+      <div className="grid grid-cols-1 md:grid-cols-2 min-h-[40vh]">
+        {/* Left Cell: Slogan/CTA */}
+        <div className="bg-pastel-purple border-b-2 md:border-b-0 md:border-r-2 border-black p-8 md:p-16 flex flex-col justify-between">
+          <div>
+            <h2 className="text-4xl md:text-6xl font-heading uppercase mb-8">
+              Create Momentum
+            </h2>
+          </div>
+          <div>
+             <button className="w-full md:w-auto bg-black text-white px-8 py-4 text-xl font-bold uppercase tracking-wider hover:bg-transparent hover:text-black border-2 border-black transition-all duration-300">
+              Start Exploring
+            </button>
+          </div>
+        </div>
+
+        {/* Right Cell: Description */}
+        <div className="bg-pastel-blue p-8 md:p-16 flex flex-col justify-center relative overflow-hidden">
+           {/* Decorative circle or element */}
+           <div className="absolute top-0 right-0 w-32 h-32 bg-black rounded-full -mr-16 -mt-16 mix-blend-overlay opacity-20"></div>
+
+          <p className="text-xl md:text-2xl font-medium uppercase tracking-wide leading-relaxed">
+            在代码中寻找韵律，用技术构建美学。
+            <br /><br />
+            <span className="opacity-70">
+              Discover the rhythm in code and build aesthetics with technology.
+              We help you master the art of creative coding.
+            </span>
+          </p>
+          
+          <div className="mt-12 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white">
+              <span className="transform -rotate-45">→</span>
+            </div>
+            <span className="font-bold uppercase tracking-wider">Learn More</span>
+          </div>
+        </div>
       </div>
     </section>
   );

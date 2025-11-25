@@ -3,6 +3,12 @@
 @theme {
   --font-sans: var(--font-inter);
   --font-heading: var(--font-oswald);
+  
+  --color-pastel-pink: #ffc4d6;
+  --color-pastel-purple: #d4c4ff;
+  --color-pastel-blue: #a6e1fa;
+  --color-pastel-green: #cff0cc;
+  --color-border: #000000;
 }
 
 :root {
@@ -27,6 +33,23 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   text-transform: uppercase;
+}
+
+/* Custom Utility Classes for Brutalist Design */
+.brutal-border {
+  border: 2px solid black;
+}
+
+.brutal-border-b {
+  border-bottom: 2px solid black;
+}
+
+.brutal-border-r {
+  border-right: 2px solid black;
+}
+
+.brutal-btn {
+  @apply bg-black text-white px-6 py-3 uppercase tracking-wider font-bold border-2 border-black transition-all duration-300 hover:bg-white hover:text-black;
 }
 
 /* Lenis Recommended Styles */

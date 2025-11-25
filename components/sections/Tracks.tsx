@@ -28,34 +28,46 @@ export default function Tracks() {
   }, { scope: containerRef });
 
   return (
-    <section id="tracks" ref={containerRef} className="py-32 px-6 bg-white border-t-2 border-black">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-6xl md:text-8xl font-bold mb-20 text-left tracking-tighter font-heading uppercase">
+    <section id="tracks" ref={containerRef} className="bg-white border-b-2 border-black">
+      {/* Section Header */}
+      <div className="border-b-2 border-black bg-pastel-green py-16 px-6">
+         <h2 className="text-6xl md:text-9xl font-bold text-center tracking-tighter font-heading uppercase">
           Curated Tracks
-      </h2>
+        </h2>
+      </div>
       
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-2 border-black">
+      <div className="max-w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 border-black">
           {tracks.map((track, index) => (
           <div
             key={track.id}
-              className={`track-card group relative p-12 border-black bg-white hover:bg-black hover:text-white transition-colors duration-300 ${
+            className={`track-card group relative p-12 md:p-20 border-black bg-white hover:bg-pastel-purple transition-colors duration-300 flex flex-col justify-between min-h-[400px] ${
                 index % 2 === 0 ? "md:border-r-2" : ""
-              } ${index < tracks.length - 2 ? "border-b-2" : "border-b-2 md:border-b-0"}`}
+              } ${index < tracks.length - 2 || (tracks.length % 2 !== 0 && index < tracks.length - 1) ? "border-b-2" : "border-b-2 md:border-b-0"}`}
           >
-            <div className="relative z-10">
-                <div className="text-5xl mb-8 group-hover:scale-110 transition-transform duration-300 origin-left">{track.icon}</div>
-                <h3 className="text-3xl font-bold mb-4 uppercase font-heading tracking-wide">{track.title}</h3>
-                <p className="text-lg text-gray-600 group-hover:text-gray-300 transition-colors mb-8 font-medium leading-relaxed">
+             {/* Circle Number/Icon */}
+             <div className="w-20 h-20 rounded-full bg-black text-white flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform duration-300">
+               {track.icon}
+             </div>
+
+            <div>
+               <h3 className="text-4xl md:text-5xl font-bold mb-6 uppercase font-heading tracking-wide leading-none">{track.title}</h3>
+               <p className="text-xl text-black font-medium leading-relaxed mb-12 max-w-md">
                 {track.description}
               </p>
-              
-                <div className="flex items-center text-base font-bold uppercase tracking-wider">
-                  View Syllabus <span className="ml-4 group-hover:translate-x-2 transition-transform duration-300">→</span>
-                </div>
-              </div>
             </div>
-          ))}
+              
+            <div className="flex items-center justify-between w-full mt-auto">
+                <div className="text-lg font-bold uppercase tracking-wider border-b-2 border-black pb-1">
+                  View Syllabus
+                </div>
+                <div className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
+                  <span className="transform -rotate-45 text-xl">→</span>
+                </div>
+            </div>
           </div>
+          ))}
+        </div>
       </div>
     </section>
   );
