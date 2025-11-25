@@ -4,9 +4,14 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+const WORDS = ["VIBE", "JOY", "IMPACT"];
+
 export default function Hero() {
   const containerRef = useRef(null);
   const titleRef = useRef(null);
+  const word1Ref = useRef<HTMLSpanElement>(null);
+  const word2Ref = useRef<HTMLSpanElement>(null);
+  const word3Ref = useRef<HTMLSpanElement>(null);
 
   useGSAP(() => {
     gsap.from(titleRef.current, {
@@ -15,6 +20,40 @@ export default function Hero() {
       duration: 1.5,
       ease: "power4.out",
     });
+
+    // Create sequential infinite loop animation
+    const timeline = gsap.timeline({ repeat: -1 });
+    const refs = [word1Ref, word2Ref, word3Ref];
+    const displayDuration = 2.0; // Time each word stays visible
+    const animDuration = 0.6; // Time for transition animation
+    
+    refs.forEach((ref, index) => {
+      // Initial position: below viewport (except first word)
+      if (index === 0) {
+        timeline.set(ref.current, { y: "0%" }, 0);
+      } else {
+        timeline.set(ref.current, { y: "100%" }, 0);
+      }
+    });
+    
+    // Animate each word sequentially
+    refs.forEach((ref, index) => {
+      const nextRef = refs[(index + 1) % refs.length];
+      
+      // Current word slides out while next word slides in
+      timeline.to(ref.current, {
+        y: "-100%",
+        duration: animDuration,
+        ease: "power2.inOut",
+      }, `+=${displayDuration}`);
+      
+      timeline.to(nextRef.current, {
+        y: "0%",
+        duration: animDuration,
+        ease: "power2.inOut",
+      }, `<`); // "<" means start at the same time as previous animation
+    });
+
   }, { scope: containerRef });
 
   return (
@@ -27,9 +66,20 @@ export default function Hero() {
       <div className="flex-1 bg-pastel-pink flex items-center justify-center border-b-2 border-black overflow-hidden p-4">
         <h1
           ref={titleRef}
-          className="text-[12vw] md:text-[14vw] leading-[0.8] font-bold tracking-tighter font-heading uppercase text-center text-black mix-blend-multiply"
+          className="text-[12vw] md:text-[14vw] leading-[0.8] font-bold tracking-tighter font-heading uppercase text-center text-black mix-blend-multiply inline-flex flex-wrap items-center justify-center"
         >
-          Code With Vibe
+          <span className="mr-[0.2em]">CODE WITH</span>
+          <span className="inline-block relative overflow-hidden h-[0.8em] align-bottom" style={{ width: "7ch" }}>
+            <span ref={word1Ref} className="absolute inset-0 flex items-center justify-center will-change-transform">
+              {WORDS[0]}
+            </span>
+            <span ref={word2Ref} className="absolute inset-0 flex items-center justify-center will-change-transform">
+              {WORDS[1]}
+            </span>
+            <span ref={word3Ref} className="absolute inset-0 flex items-center justify-center will-change-transform">
+              {WORDS[2]}
+            </span>
+          </span>
         </h1>
       </div>
 
